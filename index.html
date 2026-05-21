@@ -3,136 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- كود التحقق من جوجل لإثبات ملكية الموقع -->
-    <meta name="google-site-verification" content="JKswRids1DGAu4p3pVIcry_6bnJP0nTBySg_gjr9t7I" />
-    
-    <title>Kareem Elmohands | طالب، مبرمج، Shanwan Advanced High School</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>لوحة تحكم إدارة الفندق والمطعم الذكي</title>
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #0F172A; 
-            color: #E2E8F0; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            position: relative;
-        }
-        .profile-card {
-            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(45, 53, 67, 0.8);
-            transition: all 0.4s ease-in-out;
-            max-width: 95%; 
-        }
-        
-        .name-gradient {
-            background-image: linear-gradient(45deg, #6366F1, #8B5CF6, #EC4899); 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .section-title {
-            color: #A78BFA; 
-        }
-        .text-glow {
-            text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #1a1a1a; color: #fff; text-align: center; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; background: #2d2d2d; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 1px solid #d4af37; }
+        h1 { color: #d4af37; font-size: 24px; margin-bottom: 25px; }
+        label { display: block; text-align: right; margin-bottom: 8px; font-weight: bold; color: #ccc; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #444; background: #222; color: #fff; box-sizing: border-box; font-size: 16px; }
+        input:focus, select:focus { border-color: #d4af37; outline: none; }
+        button { background: #d4af37; color: #1a1a1a; font-weight: bold; font-size: 18px; padding: 12px 30px; border: none; border-radius: 8px; cursor: pointer; width: 100%; transition: 0.3s; }
+        button:hover { background: #fff; box-shadow: 0 0 10px #d4af37; }
+        .login-screen { display: block; }
+        .dashboard { display: none; }
+        .error { color: #ff4d4d; font-size: 14px; margin-bottom: 10px; display: none; }
+        .success { color: #4dff4d; font-size: 16px; font-weight: bold; margin-top: 15px; display: none; }
     </style>
 </head>
-<body class="p-4">
+<body>
 
-    
+    <div id="loginSection" class="container login-screen">
+        <h1>🔒 تسجيل دخول الإدارة</h1>
+        <label>أدخل كلمة مرور المسؤول:</label>
+        <input type="password" id="passwordInput" placeholder="••••••••">
+        <p id="loginError" class="error">⚠️ كلمة المرور غير صحيحة!</p>
+        <button onclick="checkPassword()">دخول اللوحة</button>
+    </div>
 
-<main class="profile-card w-full max-w-4xl p-8 lg:p-12 rounded-3xl text-center">
-
+    <div id="dashboardSection" class="container dashboard">
+        <h1>🛠️ لوحة تحكم طلبات الغرف</h1>
         
+        <label>رقم غرفة النزيل:</label>
+        <input type="number" id="roomNumber" placeholder="مثال: 305">
 
-<div class="mb-10">
+        <label>تحديث حالة الأوردر الحالي:</label>
+        <select id="orderStatus">
+            <option value="👨‍🍳 قيد التحضير في المطبخ الساخن">👨‍🍳 قيد التحضير في المطبخ</option>
+            <option value="🛵 خرج مع عامل الديليفري وجاري التوصيل">🛵 جاري التوصيل للغرفة</option>
+            <option value="✅ تم تسليم الطلب وإغلاقه بنجاح">✅ تم التسليم بنجاح</option>
+        </select>
+
+        <button onclick="updateStatus()">تحديث وإرسال إشعار للزبون</button>
+        <p id="successMessage" class="success">🎯 تم تحديث الحالة وإرسال التنبيه للبوت بنجاح!</p>
+    </div>
+
+    <script>
+        // توكن البوت الثابت لربط اللوحة بالسيرفر
+        const BOT_TOKEN = '8799094408:AAEVlQBTGfiWQaN9ZgHOEXLc0uY583M_sm0';
+
+        // التحقق من الباسورد
+        function checkPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            if (pass === 'kareem2026') { // الباسورد هنا
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        // دالة إرسال التحديث للبوت
+        function updateStatus() {
+            const room = document.getElementById('roomNumber').value;
+            const status = document.getElementById('orderStatus').value;
+            const successTxt = document.getElementById('successMessage');
+
+            if (!room) {
+                alert('برجاء كتابة رقم الغرفة أولاً!');
+                return;
+            }
+
+            // اللوحة بتبعت أمر مشفر للسيرفر عشان يغير الحالة للغرفة دي لايف
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             
-
-<h1 class="text-6xl font-extrabold mb-3 name-gradient text-glow">
-                Kareem Elmohands
-            </h1>
-            <p class="text-2xl font-medium text-gray-400">
-                طالب في الصف الأول الثانوي
-            </p>
-        </div>
-
-        
-
-<section class="mb-10 p-7 bg-slate-800/60 rounded-2xl shadow-xl">
-            <h2 class="text-4xl font-bold mb-5 section-title text-glow">
-                "رسم طريق نحو المستقبل"
-            </h2>
-            <p class="text-lg text-gray-300 leading-relaxed italic">
-                شغوف وطموح، أؤمن بأن كل يوم هو فرصة للتعلم والنمو. 
-                بالعزيمة والإصرار، أسعى لبناء أساس قوي لمستقبل مشرق. 
-                أهلاً بك في رحلتي نحو الإنجاز!
-            </p>
-        </section>
-
-        
-
-<section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-right">
-            
-            <div class="p-6 bg-slate-900 rounded-xl hover:bg-slate-800 transition duration-300 border border-slate-700">
-                <h3 class="text-xl font-semibold section-title mb-3">المسيرة التعليمية</h3>
-                <p class="text-gray-300 flex items-center mb-2">
-                    <i class="fas fa-school ml-3 text-indigo-400"></i> مدرسة شنوان الثانوية المطورة
-                </p>
-                <p class="text-gray-300 flex items-center">
-                    <i class="fas fa-graduation-cap ml-3 text-indigo-400"></i> طالب بالصف الأول الثانوي
-                </p>
-            </div>
-
-            <div class="p-6 bg-slate-900 rounded-xl hover:bg-slate-800 transition duration-300 border border-slate-700">
-                <h3 class="text-xl font-semibold section-title mb-3">بيانات شخصية</h3>
-                <p class="text-gray-300 flex items-center mb-2">
-                    <i class="fas fa-calendar-alt ml-3 text-indigo-400"></i> تاريخ الميلاد: 2 يونيو 2010
-                </p>
-                <p class="text-gray-300 flex items-center">
-                    <i class="fas fa-user-tag ml-3 text-indigo-400"></i> العمر: 15 سنة
-                </p>
-            </div>
-        </section>
-
-        
-
-<section>
-            <h2 class="text-3xl font-bold mb-7 section-title text-glow">تواصل معي</h2>
-            <div class="flex justify-center space-x-8 space-x-reverse">
-
-                <a href="https://www.facebook.com/share/1BpEWC9cKJ/?mibextid=wwXIfr" target="_blank" aria-label="حساب فيسبوك">
-                    <i class="social-icon fab fa-facebook fa-4x"></i>
-                </a>
-
-                <a href="https://www.instagram.com/kareem.elmohands?igsh=aGlkbDZ1dWFzdzg0&utm_source=qr" target="_blank" aria-label="حساب إنستغرام">
-                    <i class="social-icon fab fa-instagram fa-4x"></i>
-                </a>
-
-                <a href="https://www.tiktok.com/@kareem_mohamed_elmohands?_r=1&_t=ZS-915mvJCa0u4" target="_blank" aria-label="حساب تيك توك">
-                    <i class="social-icon fab fa-tiktok fa-4x"></i>
-                </a>
-
-                <a href="https://wa.me/201015736621" target="_blank" aria-label="رقم واتساب">
-                    <i class="social-icon fab fa-whatsapp fa-4x"></i>
-                </a>
-
-            </div>
-             <p class="text-lg text-gray-500 mt-8">
-                رقم الهاتف: 01015736621
-            </p>
-        </section>
-
-    </main>
-
+            // هنا بنبعت رسالة مخفية بيفهمها السيرفر لتحديث القاعدة
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: '8799094408', // إرسال التنبيه لسيستم الإدارة
+                    text: `تحديث_${room}_${status}`
+                })
+            })
+            .then(res => {
+                successTxt.style.display = 'block';
+                setTimeout(() => { successTxt.style.display = 'none'; }, 4000);
+            })
+            .catch(err => {
+                alert('حدث خطأ في الاتصال بالسيرفر!');
+            });
+        }
+    </script>
 </body>
 </html>
-
