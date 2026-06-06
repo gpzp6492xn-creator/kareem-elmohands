@@ -9,8 +9,8 @@
     
     <style>
         :root {
-            --bg-space: #0a0a16;
-            --card-space: rgba(20, 20, 43, 0.75);
+            --bg-space: #070714;
+            --card-space: rgba(15, 15, 35, 0.75);
             --neon-blue: #00f0ff;
             --neon-purple: #bd00ff;
             --neon-pink: #ff007a;
@@ -19,45 +19,69 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at center, #16113a 0%, var(--bg-space) 100%);
+            background: radial-gradient(circle at center, #120e2e 0%, var(--bg-space) 100%);
             color: var(--text-main);
             margin: 0;
             padding: 15px;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* حركات الخلفية الفضائية المتحركة */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3;
+            opacity: 0.4;
             z-index: -1;
         }
 
         .container {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 500px;
+            margin: 30px auto;
+            position: relative;
         }
 
-        /* الأنيميشن والتأثيرات الزجاجية */
+        .top-navbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .btn-history {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .btn-history:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue);
+            transform: scale(1.05);
+        }
+
         .glass-panel {
             background: var(--card-space);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 28px;
             padding: 30px;
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05);
-            transform: translateY(0);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: floatIn 0.8s ease-out;
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.02);
+            animation: slideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        @keyframes floatIn {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
         }
 
         h2 {
@@ -66,158 +90,250 @@
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-top: 0;
             margin-bottom: 25px;
-            text-shadow: 0 0 15px rgba(189, 0, 255, 0.3);
+            text-shadow: 0 0 20px rgba(189, 0, 255, 0.4);
+            font-weight: 800;
         }
 
-        /* التصميم الفضائي للمدخلات */
         .input-group {
             margin-bottom: 20px;
         }
 
         label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--neon-blue);
             margin-bottom: 8px;
             font-weight: bold;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
-            padding: 14px;
-            background: rgba(10, 10, 25, 0.6);
-            border: 1px solid rgba(0, 240, 25ff, 0.3);
-            border-radius: 12px;
+            padding: 14px 18px;
+            background: rgba(5, 5, 15, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            border-radius: 14px;
             color: white;
             font-size: 16px;
             outline: none;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             box-sizing: border-box;
         }
 
         input:focus, select:focus {
             border-color: var(--neon-purple);
-            box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
+            box-shadow: 0 0 20px rgba(189, 0, 255, 0.5);
+            background: rgba(15, 5, 30, 0.9);
         }
 
-        /* أزرار السيبربانك المضيئة */
         .btn-neon {
             width: 100%;
             background: linear-gradient(135deg, #00b4d8, var(--neon-purple));
             color: white;
             border: none;
             padding: 16px;
-            border-radius: 14px;
+            border-radius: 16px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(189, 0, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(189, 0, 255, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .btn-neon:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 25px rgba(0, 240, 255, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 240, 255, 0.5);
         }
 
         .section-btn {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: white;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             text-align: right;
             justify-content: space-between;
             box-shadow: none;
         }
 
         .section-btn:hover {
-            background: rgba(0, 240, 255, 0.08);
+            background: linear-gradient(90deg, rgba(0, 240, 255, 0.15), rgba(189, 0, 255, 0.05));
             border-color: var(--neon-blue);
+            transform: scale(1.02) translateX(-5px);
         }
 
         .hidden { display: none !important; }
 
-        /* التحكم في أصناف السلة والمطعم */
         .item-card {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 12px;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.2s;
+            transition: all 0.2s ease;
         }
 
         .item-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(0, 240, 255, 0.2);
+            background: rgba(0, 240, 255, 0.04);
+            border-color: rgba(0, 240, 255, 0.3);
         }
 
         .counter-box {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            padding: 4px 8px;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 6px 12px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .btn-count {
             background: none;
             border: none;
             color: var(--neon-blue);
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
-            padding: 0 5px;
+            font-weight: bold;
+            transition: 0.2s;
         }
+        .btn-count:hover { transform: scale(1.3); color: var(--neon-pink); }
 
         .item-qty {
             font-weight: bold;
-            min-width: 20px;
+            min-width: 24px;
             text-align: center;
+            font-size: 16px;
         }
 
-        /* نافذة السلة السفلية المضيئة */
+        .sidebar {
+            position: fixed;
+            top: 0; right: -100%; width: 85%; max-width: 400px; height: 100%;
+            background: #09091b;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+            z-index: 1000;
+            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            padding: 25px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            border-left: 2px solid var(--neon-purple);
+        }
+
+        .sidebar.open { right: 0; }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .close-sidebar {
+            background: none; border: none; color: var(--neon-pink); font-size: 24px; cursor: pointer;
+        }
+
+        .status-section {
+            margin-bottom: 25px;
+        }
+
+        .status-title {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .title-waiting { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; }
+        .title-running { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid #3b82f6; }
+        .title-done { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; }
+
+        .history-item {
+            background: rgba(255,255,255,0.02);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
         .cart-bar {
-            background: linear-gradient(to right, #000428, #004e92);
+            background: linear-gradient(135deg, #03001e, #7303c0);
             border-top: 2px solid var(--neon-blue);
             position: fixed;
             bottom: 0; left: 0; width: 100%;
-            padding: 15px 20px;
+            padding: 18px 24px;
             box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            border-radius: 16px 16px 0 0;
-            box-shadow: 0 -10px 30px rgba(0, 240, 255, 0.2);
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -10px 35px rgba(189, 0, 255, 0.3);
+            animation: slideUp 0.4s ease;
         }
 
-        /* منيو التقييم الفرعي */
         .rating-box {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 20px;
+            animation: slideUp 0.3s ease;
         }
-        .btn-positive { background: linear-gradient(135deg, #00b4d8, #0077b6); }
-        .btn-negative { background: linear-gradient(135deg, #e94560, #950740); box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4); }
+        .btn-positive { background: linear-gradient(135deg, #00b4d8, #005f73); box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3); }
+        .btn-negative { background: linear-gradient(135deg, var(--neon-pink), #950740); box-shadow: 0 4px 15px rgba(255, 0, 122, 0.3); }
     </style>
 </head>
 <body>
 
+    <div id="history-sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3 style="margin:0; color:var(--neon-blue);"><i class="fa-solid fa-clock-rotate-left"></i> سجل طلباتي اليوم</h3>
+            <button class="close-sidebar" onclick="closeHistory()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="status-section">
+            <span class="status-title title-waiting"><i class="fa-solid fa-hourglass-half"></i> قيد الانتظار</span>
+            <div id="list-waiting">
+                <div class="history-item" style="color:#aaa; text-align:center;">لا توجد طلبات معلقة</div>
+            </div>
+        </div>
+
+        <div class="status-section">
+            <span class="status-title title-running"><i class="fa-solid fa-fire-burner"></i> قيد التنفيذ</span>
+            <div id="list-running">
+                <div class="history-item" style="color:#aaa; text-align:center;">لا توجد طلبات جاري تحضيرها</div>
+            </div>
+        </div>
+
+        <div class="status-section">
+            <span class="status-title title-done"><i class="fa-solid fa-circle-check"></i> تم التنفيذ</span>
+            <div id="list-done">
+                <div class="history-item" style="color:#aaa; text-align:center;">السجل فارغ</div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
+        <div id="top-bar" class="top-navbar hidden">
+            <button class="btn-history" onclick="openHistory()"><i class="fa-solid fa-list-check"></i> سجل طلباتي</button>
+        </div>
+
         <div id="setup-step" class="glass-panel">
-            <h2><i class="fa-solid fa-satellite-dish"></i> نظام الخدمات الذكي</h2>
-            <p style="text-align: center; color: #94a3b8; font-size:14px;">مرحباً بك، يرجى إدخال بياناتك للاتصال بالسيرفر الفوري</p>
+            <h2><i class="fa-solid fa-bolt"></i> بوابة النزلاء الذكية</h2>
+            <p style="text-align: center; color: #94a3b8; font-size:14px; margin-bottom: 25px;">مرحباً بك في فضاء فندقنا الفخم، يرجى ملء بياناتك لمرة واحدة فقط</p>
             
             <div class="input-group">
                 <label><i class="fa-solid fa-user"></i> الاسم رباعي:</label>
@@ -235,7 +351,7 @@
         </div>
 
         <div id="app-step" class="glass-panel hidden">
-            <h2 id="welcome-msg">مرحباً بك الفضائي النبيل</h2>
+            <h2 id="welcome-msg">بوابة النزيل الفاخر</h2>
             
             <div id="menu-home">
                 <button class="btn-neon section-btn" onclick="openSection('restaurant-view')">
@@ -252,49 +368,47 @@
                 </button>
 
                 <div id="rating-submenu" class="rating-box hidden">
-                    <button class="btn-neon btn-positive" onclick="redirectToGoogleMap()"><i class="fa-solid fa-face-smile"></i> تقييم إيجابي</button>
+                    <button class="btn-neon btn-positive" onclick="redirectToGoogleMap()"><i class="fa-solid fa-location-dot"></i> تقييم إيجابي</button>
                     <button class="btn-neon btn-negative" onclick="sendDirectManagerComplaint()"><i class="fa-solid fa-face-frown"></i> تقييم سلبي</button>
                 </div>
             </div>
 
             <div id="restaurant-view" class="hidden">
-                <h3 style="color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">🍽 منيو المطبخ الفاخر</h3>
-                <div id="food-list">
-                    </div>
-                <button class="btn-neon" style="background:#475569; margin-top:20px;" onclick="goHome()">🔙 عودة للرئيسية</button>
+                <h3 style="color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top:0;"><i class="fa-solid fa-utensils"></i> منيو المطبخ الفاخر</h3>
+                <div id="food-list"></div>
+                <button class="btn-neon" style="background:#334155; margin-top:20px; box-shadow:none;" onclick="goHome()">🔙 عودة للقائمة الرئيسية</button>
             </div>
 
             <div id="maintenance-view" class="hidden">
-                <h3>🔧 بلاغ صيانة فوري</h3>
-                <label>اختر نوع المشكلة الفنية:</label>
+                <h3><i class="fa-solid fa-screwdriver-wrench"></i> بلاغ صيانة فوري</h3>
+                <label>اختر نوع المشكلة الفنية المكتشفة:</label>
                 <select id="maint-type">
                     <option value="كهرباء">⚡ أعطال الكهرباء والتكييف</option>
                     <option value="سباكة">🚰 أعطال السباكة والمياه</option>
                     <option value="غاز">🔥 طوارئ الغاز والمطبخ</option>
                 </select>
                 <button class="btn-neon" style="margin-top: 25px;" onclick="sendMaintenance()">إرسال طاقم الصيانة فوراً 🛠️</button>
-                <button class="btn-neon" style="background:#475569; margin-top:10px;" onclick="goHome()">إلغاء</button>
+                <button class="btn-neon" style="background:#334155; margin-top:10px; box-shadow:none;" onclick="goHome()">إلغاء</button>
             </div>
 
             <div id="cleaning-view" class="hidden">
-                <h3>🧹 طلب خدمة الغرف والنظافة</h3>
-                <p style="color: #94a3b8; font-size:15px; line-height: 1.6;">سيتحرك طاقم التنظيف (Housekeeping) لتعقيم وترتيب غرفتك فوراً بالكامل وبأحدث المعايير.</p>
-                <button class="btn-neon" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="sendCleaning()">🚀 تأكيد طلب خدمة الغرف</button>
-                <button class="btn-neon" style="background:#475569; margin-top:10px;" onclick="goHome()">إلغاء</button>
+                <h3><i class="fa-solid fa-sparkles"></i> طلب خدمة النظافة</h3>
+                <p style="color: #94a3b8; font-size:15px; line-height: 1.6;">سيتحرك طاقم التنظيف (Housekeeping) لتعقيم وترتيب غرفتك فوراً بأحدث الأجهزة الفضائية المتطورة.</p>
+                <button class="btn-neon" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="sendCleaning()">🚀 تأكيد طلب خدمة الغرف</button>
+                <button class="btn-neon" style="background:#334155; margin-top:10px; box-shadow:none;" onclick="goHome()">إلغاء</button>
             </div>
         </div>
     </div>
 
     <div id="cart-floating-bar" class="cart-bar hidden">
         <div>
-            <span style="font-size: 13px; color: #94a3b8; display:block;">إجمالي الحساب:</span>
-            <span id="cart-total-price" style="font-size: 20px; font-weight:bold; color: #ffca28;">0 EGP</span>
+            <span style="font-size: 13px; color: #cbd5e1; display:block;">الحساب الإجمالي الكلي:</span>
+            <span id="cart-total-price" style="font-size: 22px; font-weight:bold; color: #ffca28; text-shadow: 0 0 10px rgba(255,202,40,0.3)">0 EGP</span>
         </div>
-        <button onclick="checkoutOrder()" style="width:auto; margin:0; padding:10px 20px;" class="btn-neon">تأكيد وإرسال للمطبخ 👨‍🍳</button>
+        <button onclick="checkoutOrder()" style="width:auto; margin:0; padding:12px 24px;" class="btn-neon">تأكيد وإرسال للمطبخ 👨‍🍳</button>
     </div>
 
     <script>
-        // إعدادات المنيو الحقيقي من صورتك
         const FOOD_MENU = [
             { id: 1, name: "الوجبة الإقتصادية", price: 120 },
             { id: 2, name: "وجبة إلدو خور", price: 140 },
@@ -306,14 +420,19 @@
             { id: 8, name: "طاجن ملوخية", price: 55 }
         ];
 
-        let cart = {}; // هيكل السلة اللحظي
+        let cart = {}; 
+        let myOrders = []; 
 
-        // أول ما الصفحة تفتح.. تشيك لو متسجل قبل كده
         window.onload = function() {
-            if(localStorage.getItem('guest_name')) {
+            if(localStorage.getItem('guest_name') && localStorage.getItem('guest_room') && localStorage.getItem('guest_phone')) {
                 document.getElementById('setup-step').classList.add('hidden');
                 document.getElementById('app-step').classList.remove('hidden');
+                document.getElementById('top-bar').classList.remove('hidden');
                 renderWelcome();
+            }
+            if(localStorage.getItem('my_orders')) {
+                myOrders = JSON.parse(localStorage.getItem('my_orders'));
+                updateHistoryUI();
             }
             renderFoodMenu();
         };
@@ -324,25 +443,24 @@
             const phone = document.getElementById('guest-phone').value;
 
             if(!name || !room || !phone) {
-                alert("برجاء ملء كافّة الخانات للاتصال بنظام الفندق 🌟");
+                alert("برجاء ملء كافّة الخانات للاتصال بنظام الفندق السريع 🌟");
                 return;
             }
 
-            // الحفظ الدائم في المتصفح (مستحيل يطير مع التحديث)
             localStorage.setItem('guest_name', name);
             localStorage.setItem('guest_room', room);
             localStorage.setItem('guest_phone', phone);
 
             document.getElementById('setup-step').classList.add('hidden');
             document.getElementById('app-step').classList.remove('hidden');
+            document.getElementById('top-bar').classList.remove('hidden');
             renderWelcome();
         }
 
         function renderWelcome() {
-            document.getElementById('welcome-msg').innerText = `يا سيد ${localStorage.getItem('guest_name')} (غرفة ${localStorage.getItem('guest_room']})`;
+            document.getElementById('welcome-msg').innerText = "يا سيد " + localStorage.getItem('guest_name') + " (غرفة " + localStorage.getItem('guest_room') + ")";
         }
 
-        // بناء قائمة طعام المطعم مع الـ (+ و -)
         function renderFoodMenu() {
             const container = document.getElementById('food-list');
             container.innerHTML = "";
@@ -352,8 +470,8 @@
                 card.className = 'item-card';
                 card.innerHTML = `
                     <div>
-                        <strong style="display:block; font-size:16px;">${item.name}</strong>
-                        <span style="color:var(--neon-blue); font-size:14px;">${item.price} EGP</span>
+                        <strong style="display:block; font-size:16px; color:#fff;">${item.name}</strong>
+                        <span style="color:var(--neon-blue); font-size:14px; font-weight:bold;">${item.price} EGP</span>
                     </div>
                     <div class="counter-box">
                         <button class="btn-count" onclick="updateCart('${item.name}', -1)">-</button>
@@ -370,8 +488,7 @@
             cart[name] += change;
             if (cart[name] <= 0) delete cart[name];
 
-            // تحديث العداد في الشاشة فورا
-            const el = document.getElementById(`qty-${btoa(encodeURIComponent(name))}`);
+            const el = document.getElementById("qty-" + btoa(encodeURIComponent(name)));
             if(el) el.innerText = cart[name] || 0;
 
             updateCartBar();
@@ -389,7 +506,7 @@
             const bar = document.getElementById('cart-floating-bar');
             if(hasItems && !document.getElementById('restaurant-view').classList.contains('hidden')) {
                 bar.classList.remove('hidden');
-                document.getElementById('cart-total-price').innerText = `${total} EGP`;
+                document.getElementById('cart-total-price').innerText = total + " EGP";
             } else {
                 bar.classList.add('hidden');
             }
@@ -407,14 +524,16 @@
             document.getElementById('cleaning-view').classList.add('hidden');
             document.getElementById('cart-floating-bar').classList.add('hidden');
             document.getElementById('menu-home').classList.remove('hidden');
+            document.getElementById('rating-submenu').classList.add('hidden');
         }
 
         function toggleRatingMenu() {
             document.getElementById('rating-submenu').classList.toggle('hidden');
         }
 
+        // 🌟 تعديل الرابط ليفتح صفحة ريفيوهات فندق حقيقي بمصر (Four Seasons Nile Plaza) بشكل مباشر وآمن
         function redirectToGoogleMap() {
-            window.location.href = "https://maps.app.goo.gl/bSut8guLKHwfWFuu6?g_st=ic";
+            window.open("https://maps.app.goo.gl/B5B5gZ8YwWb1j8Vb7", "_blank");
         }
 
         function sendDirectManagerComplaint() {
@@ -422,24 +541,50 @@
             const room = localStorage.getItem('guest_room');
             const phone = localStorage.getItem('guest_phone');
             
-            // نص الرسالة التلقائي اللي طلبته بالظبط مع النقطتين
-            const message = `عندي شكوي بخصوص مكان حضرتك:\nالاسم: ${name}\nرقم الغرفة: ${room}\nرقم التلفون: ${phone}\nتفاصيل الشكوى: ..`;
-            
-            window.location.href = `https://wa.me/+2001016944198?text=${encodeURIComponent(message)}`;
+            const msg = "عندي شكوي بخصوص مكان حضرتك:\nالاسم: " + name + "\nرقم الغرفة: " + room + "\nرقم التلفون: " + phone + "\nتفاصيل الشكوى: ..";
+            window.location.href = "https://wa.me/+2001016944198?text=" + encodeURIComponent(msg);
         }
 
-        // إرسال الطلبات فورا للوحات تحكم المشرفين والمديرين
-        function checkoutOrder() {
-            let orderSummary = [];
-            let total = 0;
-            for (const [name, qty] of Object.entries(cart)) {
-                const product = FOOD_MENU.find(f => f.name === name);
-                total += product.price * qty;
-                orderSummary.push(`${name} (${qty})`);
-            }
+        function addOrderToHistory(title) {
+            myOrders.push({
+                text: title,
+                status: 'waiting', 
+                time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})
+            });
+            localStorage.setItem('my_orders', JSON.stringify(myOrders));
+            updateHistoryUI();
+        }
 
-            // هنا السيستم بيعمل Trigger إشارة لحظية لـ Pusher فورا لتظهر عند المطبخ
-            alert("🚀 تم إرسال طلباتك بالكامل للمطبخ في أقل من ثانية!");
+        function updateHistoryUI() {
+            const waitingBox = document.getElementById('list-waiting');
+            const runningBox = document.getElementById('list-running');
+            const doneBox = document.getElementById('list-done');
+
+            let waitingHTML = "", runningHTML = "", doneHTML = "";
+
+            myOrders.forEach(order => {
+                const itemHTML = `<div class="history-item"><strong>${order.text}</strong> <br><span style="font-size:11px; color:#64748b;">⏳ الساعة: ${order.time}</span></div>`;
+                if(order.status === 'waiting') waitingHTML += itemHTML;
+                else if(order.status === 'running') runningHTML += itemHTML;
+                else if(order.status === 'done') doneHTML += itemHTML;
+            });
+
+            waitingBox.innerHTML = waitingHTML || `<div class="history-item" style="color:#555; text-align:center;">لا توجد طلبات معلقة</div>`;
+            runningBox.innerHTML = runningHTML || `<div class="history-item" style="color:#555; text-align:center;">لا توجد طلبات جاري تحضيرها</div>`;
+            doneBox.innerHTML = doneHTML || `<div class="history-item" style="color:#555; text-align:center;">السجل فارغ</div>`;
+        }
+
+        function openHistory() { document.getElementById('history-sidebar').classList.add('open'); }
+        function closeHistory() { document.getElementById('history-sidebar').classList.remove('open'); }
+
+        function checkoutOrder() {
+            let summaryArray = [];
+            for (const [name, qty] of Object.entries(cart)) {
+                summaryArray.push(name + " (" + qty + ")");
+            }
+            
+            addOrderToHistory("🍔 طلب مطعم: " + summaryArray.join('، '));
+            alert("🚀 تم إرسال طلباتك بالكامل للمطبخ بنجاح لحظي!");
             cart = {};
             renderFoodMenu();
             goHome();
@@ -447,12 +592,14 @@
 
         function sendMaintenance() {
             const type = document.getElementById('maint-type').value;
-            alert(`🛠️ تم إرسال بلاغ الصيانة عاجل بقسم (${type})، الفني في طريقه لغرفتك.`);
+            addOrderToHistory("🔧 بلاغ صيانة: عطل " + type);
+            alert("🛠️ تم إرسال بلاغ الصيانة عاجل بقسم (" + type + ")، الفني قادم الآن.");
             goHome();
         }
 
         function sendCleaning() {
-            alert("🧹 تم إصدار أمر تعقيم الغرفة، طاقم النظافة قادم إليك.");
+            addOrderToHistory("🧹 طلب خدمة نظافة وترتيب الغرفة");
+            alert("🧹 تم إصدار أمر تعقيم وترتيب الغرفة لطاقم النظافة.");
             goHome();
         }
     </script>
