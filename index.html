@@ -3,63 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kareem Elmohands | Profile</title>
+    <title>Kareem Elmohands</title>
+    <!-- تضمين Tailwind CSS وأيقونات FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
         body {
             font-family: 'Cairo', sans-serif;
         }
+        /* حبشكنات: حركة تدرج الألوان في الخلفية */
+        .bg-animate {
+            background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.15), transparent 60%), #020617;
+        }
     </style>
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950 flex flex-col justify-between">
+<body class="min-h-screen bg-animate text-slate-100 flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-950 overflow-x-hidden">
 
-    <header class="relative overflow-hidden py-20 px-6 text-center bg-gradient-to-b from-slate-900 to-slate-950">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.06),transparent_50%)]"></div>
-        <div class="max-w-3xl mx-auto relative z-10">
-            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent py-2">
-                Kareem Elmohands
-            </h1>
-            <p class="text-xl text-slate-400 mb-2 font-medium">
-                Full-Stack Web Developer & System Architect
-            </p>
-            <p class="text-sm text-slate-500">
-                طالب بالصف الثاني بكالوريا • المدرسة الثانوية المطورة
-            </p>
-        </div>
-    </header>
+    <!-- كارت التعريف الرئيسي -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md bg-slate-900/40 border border-slate-800 rounded-3xl p-8 backdrop-blur-md shadow-2xl relative overflow-hidden group hover:border-cyan-500/30 transition-all duration-500">
+            
+            <!-- خط مضيء فوق الكارت (Neon Border Effect) -->
+            <div class="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
 
-    <main class="max-w-3xl mx-auto px-6 py-8 space-y-12 w-full flex-grow">
-        
-        <section class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm">
-            <h2 class="text-2xl font-bold mb-4 text-cyan-400 border-r-4 border-cyan-500 pr-3">نبذة عني</h2>
-            <p class="text-slate-300 leading-relaxed text-lg">
-                أنا كريم المهندس، مبرمج ومطور ويب شغوف ببناء الأنظمة الرقمية المتكاملة. متخصص في تحويل الأفكار المعقدة إلى تطبيقات ويب سلسة، سريعة، وذات كفاءة عالية. أركز دائماً على كتابة كود نظيف وتصميم بنية تحتية قوية للسيستم تضمن استقراره وتحمله لضغط البيانات.
-            </p>
-        </section>
+            <!-- رأس الكارت -->
+            <div class="text-center space-y-4">
+                <!-- أيقونة برمجية مضيئة -->
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-cyan-550/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-2xl shadow-lg shadow-cyan-500/5 animate-pulse">
+                    <i class="fa-solid fa-terminal"></i>
+                </div>
 
-        <section class="text-center space-y-8 py-4">
-            <div>
+                <!-- الاسم -->
+                <h1 class="text-3xl font-black tracking-tight text-white">
+                    Kareem Elmohands
+                </h1>
+
+                <!-- سطر التخصص المتغير (Typing Effect الحبشكنات) -->
+                <div class="text-cyan-400 font-medium text-sm min-h-[20px] bg-cyan-500/5 inline-block px-3 py-1 rounded-md border border-cyan-500/10">
+                    <span id="typing-text"></span><span class="animate-ping">|</span>
+                </div>
+
+                <!-- النبذة المحددة بالملي زي ما طلبت -->
+                <p class="text-slate-300 text-base leading-relaxed pt-2">
+                    Kareem Elmohands مواليد <span class="text-cyan-400 font-bold">2/6/2010</span>، محترف في مجالات تصميم المواقع وبناء سيستم كامل متكامل.
+                </p>
+                
+                <p class="text-xs text-slate-500">
+                    طالب في المدرسة الثانوية المطورة (الصف الثاني بكالوريا).
+                </p>
+            </div>
+
+            <!-- أزرار التواصل -->
+            <div class="mt-8 space-y-4">
+                <!-- زرار الواتساب المضيء -->
                 <a 
                   href="https://wa.me/2001274847794" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg shadow-lg shadow-emerald-900/20 hover:scale-[1.02] transition-all duration-200"
+                  class="flex items-center justify-center gap-3 w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all duration-300 shadow-lg shadow-emerald-900/20 hover:scale-[1.02]"
                 >
-                  <i class="fa-brands fa-whatsapp text-2xl"></i>
+                  <i class="fa-brands fa-whatsapp text-xl"></i>
                   تواصل عبر الواتساب
                 </a>
-            </div>
 
-            <div class="pt-4">
-                <p class="text-xs uppercase tracking-wider text-slate-500 mb-4">تابعني على منصات التواصل</p>
+                <!-- خط فاصل شفاف -->
+                <div class="flex items-center my-4 before:flex-1 before:border-t before:border-slate-800 after:flex-1 after:border-t after:border-slate-800 text-xs text-slate-500 px-2">
+                    أو تابعني على
+                </div>
+
+                <!-- السوشيال ميديا بتأثيرات الـ Hover -->
                 <div class="flex justify-center gap-4">
                     <a 
                       href="https://www.facebook.com/share/1SrsnDBSJv/?mibextid=wwXIfr" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all text-xl"
+                      class="w-12 h-12 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all duration-300 text-lg hover:scale-110"
                       title="Facebook"
                     >
                       <i class="fa-brands fa-facebook-f"></i>
@@ -68,7 +87,7 @@
                       href="https://www.instagram.com/kareem.elmohands?igsh=aGlkbDZ1dWFzdzg0&utm_source=qr" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/5 transition-all text-xl"
+                      class="w-12 h-12 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/5 transition-all duration-300 text-lg hover:scale-110"
                       title="Instagram"
                     >
                       <i class="fa-brands fa-instagram"></i>
@@ -77,23 +96,66 @@
                       href="https://vt.tiktok.com/ZSCUVa4Yb/" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-slate-800 transition-all text-xl"
+                      class="w-12 h-12 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-slate-800 transition-all duration-300 text-lg hover:scale-110"
                       title="TikTok"
                     >
                       <i class="fa-brands fa-tiktok"></i>
                     </a>
                 </div>
             </div>
-        </section>
 
+        </div>
     </main>
 
-    <footer class="border-t border-slate-900 py-8 text-center text-xs text-slate-600 w-full">
-        <p>© <span id="year"></span> Kareem Elmohands. All rights reserved.</p>
+    <!-- الحقوق تحت خفيفة جداً -->
+    <footer class="py-6 text-center text-[10px] text-slate-600 tracking-wider">
+        <p>© <span id="year"></span> KAREEM ELMOHANDS. ALL RIGHTS RESERVED.</p>
     </footer>
 
+    <!-- سكريبت الحبشكنات لتأثير الكتابة الآلية وتحديث السنة -->
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // تأثير الكتابة (Typing Effect)
+        const words = ["Web Developer", "System Architect", "Code Lover"];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typing-text').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typing-text').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 60);
+            };
+            loopDeleting();
+        }
+
+        typingEffect();
     </script>
 </body>
 </html>
