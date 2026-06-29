@@ -1,607 +1,144 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الخدمات الذكية - الفندق الفاخر</title>
-    <script src="https://js.pusher.com/8.0.1/pusher.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-space: #070714;
-            --card-space: rgba(15, 15, 35, 0.75);
-            --neon-blue: #00f0ff;
-            --neon-purple: #bd00ff;
-            --neon-pink: #ff007a;
-            --text-main: #e2e8f0;
-        }
+import React from 'react';
+import { FaWhatsapp, FaFacebook, FaInstagram, FaTiktok, FaCode, FaServer, FaDatabase } from 'react-icons/fa';
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at center, #120e2e 0%, var(--bg-space) 100%);
-            color: var(--text-main);
-            margin: 0;
-            padding: 15px;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.4;
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 30px auto;
-            position: relative;
-        }
-
-        .top-navbar {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-        }
-
-        .btn-history {
-            background: rgba(0, 240, 255, 0.1);
-            border: 1px solid var(--neon-blue);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
-        }
-
-        .btn-history:hover {
-            background: var(--neon-blue);
-            color: #000;
-            box-shadow: 0 0 20px var(--neon-blue);
-            transform: scale(1.05);
-        }
-
-        .glass-panel {
-            background: var(--card-space);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 240, 255, 0.15);
-            border-radius: 28px;
-            padding: 30px;
-            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.02);
-            animation: slideUp 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 26px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-top: 0;
-            margin-bottom: 25px;
-            text-shadow: 0 0 20px rgba(189, 0, 255, 0.4);
-            font-weight: 800;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            color: var(--neon-blue);
-            margin-bottom: 8px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(5, 5, 15, 0.8);
-            border: 1px solid rgba(0, 240, 255, 0.25);
-            border-radius: 14px;
-            color: white;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 20px rgba(189, 0, 255, 0.5);
-            background: rgba(15, 5, 30, 0.9);
-        }
-
-        .btn-neon {
-            width: 100%;
-            background: linear-gradient(135deg, #00b4d8, var(--neon-purple));
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(189, 0, 255, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-neon:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 240, 255, 0.5);
-        }
-
-        .section-btn {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: white;
-            margin-bottom: 16px;
-            text-align: right;
-            justify-content: space-between;
-            box-shadow: none;
-        }
-
-        .section-btn:hover {
-            background: linear-gradient(90deg, rgba(0, 240, 255, 0.15), rgba(189, 0, 255, 0.05));
-            border-color: var(--neon-blue);
-            transform: scale(1.02) translateX(-5px);
-        }
-
-        .hidden { display: none !important; }
-
-        .item-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 18px;
-            margin-bottom: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s ease;
-        }
-
-        .item-card:hover {
-            background: rgba(0, 240, 255, 0.04);
-            border-color: rgba(0, 240, 255, 0.3);
-        }
-
-        .counter-box {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 6px 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .btn-count {
-            background: none;
-            border: none;
-            color: var(--neon-blue);
-            font-size: 22px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-        .btn-count:hover { transform: scale(1.3); color: var(--neon-pink); }
-
-        .item-qty {
-            font-weight: bold;
-            min-width: 24px;
-            text-align: center;
-            font-size: 16px;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0; right: -100%; width: 85%; max-width: 400px; height: 100%;
-            background: #09091b;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.8);
-            z-index: 1000;
-            transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
-            padding: 25px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            border-left: 2px solid var(--neon-purple);
-        }
-
-        .sidebar.open { right: 0; }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .close-sidebar {
-            background: none; border: none; color: var(--neon-pink); font-size: 24px; cursor: pointer;
-        }
-
-        .status-section {
-            margin-bottom: 25px;
-        }
-
-        .status-title {
-            font-size: 15px;
-            font-weight: bold;
-            padding: 6px 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-
-        .title-waiting { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; }
-        .title-running { background: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid #3b82f6; }
-        .title-done { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid #10b981; }
-
-        .history-item {
-            background: rgba(255,255,255,0.02);
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .cart-bar {
-            background: linear-gradient(135deg, #03001e, #7303c0);
-            border-top: 2px solid var(--neon-blue);
-            position: fixed;
-            bottom: 0; left: 0; width: 100%;
-            padding: 18px 24px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            border-radius: 24px 24px 0 0;
-            box-shadow: 0 -10px 35px rgba(189, 0, 255, 0.3);
-            animation: slideUp 0.4s ease;
-        }
-
-        .rating-box {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-            animation: slideUp 0.3s ease;
-        }
-        .btn-positive { background: linear-gradient(135deg, #00b4d8, #005f73); box-shadow: 0 4px 15px rgba(0, 180, 216, 0.3); }
-        .btn-negative { background: linear-gradient(135deg, var(--neon-pink), #950740); box-shadow: 0 4px 15px rgba(255, 0, 122, 0.3); }
-    </style>
-</head>
-<body>
-
-    <div id="history-sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <h3 style="margin:0; color:var(--neon-blue);"><i class="fa-solid fa-clock-rotate-left"></i> سجل طلباتي اليوم</h3>
-            <button class="close-sidebar" onclick="closeHistory()"><i class="fa-solid fa-xmark"></i></button>
+export default function Portfolio() {
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
+      
+      {/* Hero Section */}
+      <header className="relative overflow-hidden py-24 px-6 text-center border-b border-slate-800 bg-gradient-to-b from-slate-900 to-slate-955">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08),transparent_50%)]"></div>
+        <div className="max-w-3xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-400 mb-6 border border-cyan-500/20">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            متاح للمشاريع والتعاقدات
+          </div>
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">
+            Kareem Elmohands
+          </h1>
+          <p className="text-xl text-slate-400 mb-2 font-medium">
+            Full-Stack Web Developer & System Architect
+          </p>
+          <p className="text-sm text-slate-500">
+            طالب بالصف الثاني بكالوريا • المدرسة الثانوية المطورة
+          </p>
         </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-5xl mx-auto px-6 py-16 space-y-20">
         
-        <div class="status-section">
-            <span class="status-title title-waiting"><i class="fa-solid fa-hourglass-half"></i> قيد الانتظار</span>
-            <div id="list-waiting">
-                <div class="history-item" style="color:#aaa; text-align:center;">لا توجد طلبات معلقة</div>
-            </div>
-        </div>
+        {/* About Section */}
+        <section className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm">
+          <h2 className="text-2xl font-bold mb-4 text-cyan-400 border-r-4 border-cyan-500 pr-3">نبذة عني</h2>
+          <p className="text-slate-300 leading-relaxed text-lg">
+            أنا كريم المهندس، مبرمج ومطور ويب شغوف ببناء الأنظمة الرقمية المتكاملة. متخصص في تحويل الأفكار المعقدة إلى تطبيقات ويب سلسة، سريعة، وذات كفاءة عالية. أركز دائماً على كتابة كود نظيف وتصميم بنية تحتية قوية للسيستم تضمن استقراره وتحمله لضغط البيانات.
+          </p>
+        </section>
 
-        <div class="status-section">
-            <span class="status-title title-running"><i class="fa-solid fa-fire-burner"></i> قيد التنفيذ</span>
-            <div id="list-running">
-                <div class="history-item" style="color:#aaa; text-align:center;">لا توجد طلبات جاري تحضيرها</div>
+        {/* Services / Expertise */}
+        <section className="space-y-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-white mb-2">ماذا أقدم؟</h2>
+            <p className="text-slate-400">خدمات برمجية احترافية لتطوير أعمالك</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Service 1 */}
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
+              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                <FaCode />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-white">برمجة وتطوير المواقع</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                بناء واجهات مستخدم (Front-End) حديثة، سريعة ومتجاوبة بالكامل مع جميع الشاشات باستخدام أحدث التقنيات.
+              </p>
             </div>
-        </div>
 
-        <div class="status-section">
-            <span class="status-title title-done"><i class="fa-solid fa-circle-check"></i> تم التنفيذ</span>
-            <div id="list-done">
-                <div class="history-item" style="color:#aaa; text-align:center;">السجل فارغ</div>
+            {/* Service 2 */}
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
+              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                <FaServer />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-white">تصميم سيستم متكامل</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                تطوير لوحات تحكم (Admin Dashboards) وأنظمة خلفية (Back-End) قوية لإدارة العمليات، الموظفين، والمبيعات بدقة.
+              </p>
             </div>
-        </div>
+
+            {/* Service 3 */}
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
+              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                <FaDatabase />
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-white">ربط قواعد البيانات والـ APIs</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                تصميم وهيكلة قواعد البيانات، وبناء وتكامل الـ APIs لضمان مزامنة البيانات بين أجزاء السيستم بسرعة وأمان.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact & Socials */}
+        <section className="text-center space-y-8 py-8">
+          <div className="max-w-xl mx-auto">
+            <h2 className="text-3xl font-bold text-white mb-3">تواصل معي الآن</h2>
+            <p className="text-slate-400 mb-8">هل لديك فكرة مشروع أو سيستم تريد تنفيذه؟ دعنا نتحدث ونبدأ العمل فوراً.</p>
+            
+            {/* Primary CTA: WhatsApp */}
+            <a 
+              href="https://wa.me/2001274847794" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg shadow-lg shadow-emerald-900/20 hover:scale-[1.02] transition-all duration-200"
+            >
+              <FaWhatsapp className="text-2xl" />
+              تواصل عبر الواتساب
+            </a>
+          </div>
+
+          {/* Social Links */}
+          <div className="pt-6">
+            <p className="text-xs uppercase tracking-wider text-slate-500 mb-4">تابعني على منصات التواصل</p>
+            <div className="flex justify-center gap-4">
+              <a 
+                href="https://www.facebook.com/share/1SrsnDBSJv/?mibextid=wwXIfr" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all text-xl"
+                title="Facebook"
+              >
+                <FaFacebook />
+              </a>
+              <a 
+                href="https://www.instagram.com/kareem.elmohands?igsh=aGlkbDZ1dWFzdzg0&utm_source=qr" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/5 transition-all text-xl"
+                title="Instagram"
+              >
+                <FaInstagram />
+              </a>
+              <a 
+                href="https://vt.tiktok.com/ZSCUVa4Yb/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-slate-800 transition-all text-xl"
+                title="TikTok"
+              >
+                <FaTiktok />
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-900 py-8 text-center text-xs text-slate-600">
+        <p>© {new Date().getFullYear()} Kareem Elmohands. All rights reserved.</p>
+      </footer>
+
     </div>
-
-    <div class="container">
-        <div id="top-bar" class="top-navbar hidden">
-            <button class="btn-history" onclick="openHistory()"><i class="fa-solid fa-list-check"></i> سجل طلباتي</button>
-        </div>
-
-        <div id="setup-step" class="glass-panel">
-            <h2><i class="fa-solid fa-bolt"></i> بوابة النزلاء الذكية</h2>
-            <p style="text-align: center; color: #94a3b8; font-size:14px; margin-bottom: 25px;">مرحباً بك في فضاء فندقنا الفخم، يرجى ملء بياناتك لمرة واحدة فقط</p>
-            
-            <div class="input-group">
-                <label><i class="fa-solid fa-user"></i> الاسم رباعي:</label>
-                <input type="text" id="guest-name" placeholder="محمد أحمد محمود علي">
-            </div>
-            <div class="input-group">
-                <label><i class="fa-solid fa-door-open"></i> رقم الغرفة:</label>
-                <input type="number" id="guest-room" placeholder="204">
-            </div>
-            <div class="input-group">
-                <label><i class="fa-solid fa-phone"></i> رقم الهاتف المحمول:</label>
-                <input type="tel" id="guest-phone" placeholder="01012345678">
-            </div>
-            <button class="btn-neon" onclick="saveProfile()">اتصال بالمركبة الفندقية 🚀</button>
-        </div>
-
-        <div id="app-step" class="glass-panel hidden">
-            <h2 id="welcome-msg">بوابة النزيل الفاخر</h2>
-            
-            <div id="menu-home">
-                <button class="btn-neon section-btn" onclick="openSection('restaurant-view')">
-                    <span>🍔 اطلب من المطعم</span> <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button class="btn-neon section-btn" onclick="openSection('maintenance-view')">
-                    <span>🔧 طلب صيانة للغرفة</span> <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button class="btn-neon section-btn" onclick="openSection('cleaning-view')">
-                    <span>🧹 خدمة تنظيف الغرف</span> <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button class="btn-neon section-btn" onclick="toggleRatingMenu()">
-                    <span>⭐ قيم المكان</span> <i class="fa-solid fa-star"></i>
-                </button>
-
-                <div id="rating-submenu" class="rating-box hidden">
-                    <button class="btn-neon btn-positive" onclick="redirectToGoogleMap()"><i class="fa-solid fa-location-dot"></i> تقييم إيجابي</button>
-                    <button class="btn-neon btn-negative" onclick="sendDirectManagerComplaint()"><i class="fa-solid fa-face-frown"></i> تقييم سلبي</button>
-                </div>
-            </div>
-
-            <div id="restaurant-view" class="hidden">
-                <h3 style="color: var(--neon-blue); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top:0;"><i class="fa-solid fa-utensils"></i> منيو المطبخ الفاخر</h3>
-                <div id="food-list"></div>
-                <button class="btn-neon" style="background:#334155; margin-top:20px; box-shadow:none;" onclick="goHome()">🔙 عودة للقائمة الرئيسية</button>
-            </div>
-
-            <div id="maintenance-view" class="hidden">
-                <h3><i class="fa-solid fa-screwdriver-wrench"></i> بلاغ صيانة فوري</h3>
-                <label>اختر نوع المشكلة الفنية المكتشفة:</label>
-                <select id="maint-type">
-                    <option value="كهرباء">⚡ أعطال الكهرباء والتكييف</option>
-                    <option value="سباكة">🚰 أعطال السباكة والمياه</option>
-                    <option value="غاز">🔥 طوارئ الغاز والمطبخ</option>
-                </select>
-                <button class="btn-neon" style="margin-top: 25px;" onclick="sendMaintenance()">إرسال طاقم الصيانة فوراً 🛠️</button>
-                <button class="btn-neon" style="background:#334155; margin-top:10px; box-shadow:none;" onclick="goHome()">إلغاء</button>
-            </div>
-
-            <div id="cleaning-view" class="hidden">
-                <h3><i class="fa-solid fa-sparkles"></i> طلب خدمة النظافة</h3>
-                <p style="color: #94a3b8; font-size:15px; line-height: 1.6;">سيتحرك طاقم التنظيف (Housekeeping) لتعقيم وترتيب غرفتك فوراً بأحدث الأجهزة الفضائية المتطورة.</p>
-                <button class="btn-neon" style="background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="sendCleaning()">🚀 تأكيد طلب خدمة الغرف</button>
-                <button class="btn-neon" style="background:#334155; margin-top:10px; box-shadow:none;" onclick="goHome()">إلغاء</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="cart-floating-bar" class="cart-bar hidden">
-        <div>
-            <span style="font-size: 13px; color: #cbd5e1; display:block;">الحساب الإجمالي الكلي:</span>
-            <span id="cart-total-price" style="font-size: 22px; font-weight:bold; color: #ffca28; text-shadow: 0 0 10px rgba(255,202,40,0.3)">0 EGP</span>
-        </div>
-        <button onclick="checkoutOrder()" style="width:auto; margin:0; padding:12px 24px;" class="btn-neon">تأكيد وإرسال للمطبخ 👨‍🍳</button>
-    </div>
-
-    <script>
-        const FOOD_MENU = [
-            { id: 1, name: "الوجبة الإقتصادية", price: 120 },
-            { id: 2, name: "وجبة إلدو خور", price: 140 },
-            { id: 3, name: "وجبة الجوكر", price: 145 },
-            { id: 4, name: "وجبة ميكس التوفير", price: 150 },
-            { id: 5, name: "ميكس التوفير صينية", price: 350 },
-            { id: 6, name: "فرخة مشوية كاملة", price: 310 },
-            { id: 7, name: "سندوتش كير فراخ", price: 70 },
-            { id: 8, name: "طاجن ملوخية", price: 55 }
-        ];
-
-        let cart = {}; 
-        let myOrders = []; 
-
-        window.onload = function() {
-            if(localStorage.getItem('guest_name') && localStorage.getItem('guest_room') && localStorage.getItem('guest_phone')) {
-                document.getElementById('setup-step').classList.add('hidden');
-                document.getElementById('app-step').classList.remove('hidden');
-                document.getElementById('top-bar').classList.remove('hidden');
-                renderWelcome();
-            }
-            if(localStorage.getItem('my_orders')) {
-                myOrders = JSON.parse(localStorage.getItem('my_orders'));
-                updateHistoryUI();
-            }
-            renderFoodMenu();
-        };
-
-        function saveProfile() {
-            const name = document.getElementById('guest-name').value;
-            const room = document.getElementById('guest-room').value;
-            const phone = document.getElementById('guest-phone').value;
-
-            if(!name || !room || !phone) {
-                alert("برجاء ملء كافّة الخانات للاتصال بنظام الفندق السريع 🌟");
-                return;
-            }
-
-            localStorage.setItem('guest_name', name);
-            localStorage.setItem('guest_room', room);
-            localStorage.setItem('guest_phone', phone);
-
-            document.getElementById('setup-step').classList.add('hidden');
-            document.getElementById('app-step').classList.remove('hidden');
-            document.getElementById('top-bar').classList.remove('hidden');
-            renderWelcome();
-        }
-
-        function renderWelcome() {
-            document.getElementById('welcome-msg').innerText = "يا سيد " + localStorage.getItem('guest_name') + " (غرفة " + localStorage.getItem('guest_room') + ")";
-        }
-
-        function renderFoodMenu() {
-            const container = document.getElementById('food-list');
-            container.innerHTML = "";
-            FOOD_MENU.forEach(item => {
-                const qty = cart[item.name] || 0;
-                const card = document.createElement('div');
-                card.className = 'item-card';
-                card.innerHTML = `
-                    <div>
-                        <strong style="display:block; font-size:16px; color:#fff;">${item.name}</strong>
-                        <span style="color:var(--neon-blue); font-size:14px; font-weight:bold;">${item.price} EGP</span>
-                    </div>
-                    <div class="counter-box">
-                        <button class="btn-count" onclick="updateCart('${item.name}', -1)">-</button>
-                        <span class="item-qty" id="qty-${btoa(encodeURIComponent(item.name))}">${qty}</span>
-                        <button class="btn-count" onclick="updateCart('${item.name}', 1)">+</button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function updateCart(name, change) {
-            if (!cart[name]) cart[name] = 0;
-            cart[name] += change;
-            if (cart[name] <= 0) delete cart[name];
-
-            const el = document.getElementById("qty-" + btoa(encodeURIComponent(name)));
-            if(el) el.innerText = cart[name] || 0;
-
-            updateCartBar();
-        }
-
-        function updateCartBar() {
-            let total = 0;
-            let hasItems = false;
-            for (const [name, qty] of Object.entries(cart)) {
-                const product = FOOD_MENU.find(f => f.name === name);
-                total += product.price * qty;
-                hasItems = true;
-            }
-
-            const bar = document.getElementById('cart-floating-bar');
-            if(hasItems && !document.getElementById('restaurant-view').classList.contains('hidden')) {
-                bar.classList.remove('hidden');
-                document.getElementById('cart-total-price').innerText = total + " EGP";
-            } else {
-                bar.classList.add('hidden');
-            }
-        }
-
-        function openSection(id) {
-            document.getElementById('menu-home').classList.add('hidden');
-            document.getElementById(id).classList.remove('hidden');
-            if(id === 'restaurant-view') updateCartBar();
-        }
-
-        function goHome() {
-            document.getElementById('restaurant-view').classList.add('hidden');
-            document.getElementById('maintenance-view').classList.add('hidden');
-            document.getElementById('cleaning-view').classList.add('hidden');
-            document.getElementById('cart-floating-bar').classList.add('hidden');
-            document.getElementById('menu-home').classList.remove('hidden');
-            document.getElementById('rating-submenu').classList.add('hidden');
-        }
-
-        function toggleRatingMenu() {
-            document.getElementById('rating-submenu').classList.toggle('hidden');
-        }
-
-        // 🌟 رابط التقييم المباشر الدقيق لفندق موفنبيك العين السخنة باستخدام الـ Place ID
-        function redirectToGoogleMap() {
-            window.open("https://search.google.com/local/writereview?placeid=ChIJawk683AvVhQRWPXoXaiXeCw", "_blank");
-        }
-
-        function sendDirectManagerComplaint() {
-            const name = localStorage.getItem('guest_name');
-            const room = localStorage.getItem('guest_room');
-            const phone = localStorage.getItem('guest_phone');
-            
-            const msg = "عندي شكوي بخصوص مكان حضرتك:\nالاسم: " + name + "\nرقم الغرفة: " + room + "\nرقم التلفون: " + phone + "\nتفاصيل الشكوى: ..";
-            window.location.href = "https://wa.me/+2001016944198?text=" + encodeURIComponent(msg);
-        }
-
-        function addOrderToHistory(title) {
-            myOrders.push({
-                text: title,
-                status: 'waiting', 
-                time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})
-            });
-            localStorage.setItem('my_orders', JSON.stringify(myOrders));
-            updateHistoryUI();
-        }
-
-        function updateHistoryUI() {
-            const waitingBox = document.getElementById('list-waiting');
-            const runningBox = document.getElementById('list-running');
-            const doneBox = document.getElementById('list-done');
-
-            let waitingHTML = "", runningHTML = "", doneHTML = "";
-
-            myOrders.forEach(order => {
-                const itemHTML = `<div class="history-item"><strong>${order.text}</strong> <br><span style="font-size:11px; color:#64748b;">⏳ الساعة: ${order.time}</span></div>`;
-                if(order.status === 'waiting') waitingHTML += itemHTML;
-                else if(order.status === 'running') runningHTML += itemHTML;
-                else if(order.status === 'done') doneHTML += itemHTML;
-            });
-
-            waitingBox.innerHTML = waitingHTML || `<div class="history-item" style="color:#555; text-align:center;">لا توجد طلبات معلقة</div>`;
-            runningBox.innerHTML = runningHTML || `<div class="history-item" style="color:#555; text-align:center;">لا توجد طلبات جاري تحضيرها</div>`;
-            doneBox.innerHTML = doneHTML || `<div class="history-item" style="color:#555; text-align:center;">السجل فارغ</div>`;
-        }
-
-        function openHistory() { document.getElementById('history-sidebar').classList.add('open'); }
-        function closeHistory() { document.getElementById('history-sidebar').classList.remove('open'); }
-
-        function checkoutOrder() {
-            let summaryArray = [];
-            for (const [name, qty] of Object.entries(cart)) {
-                summaryArray.push(name + " (" + qty + ")");
-            }
-            
-            addOrderToHistory("🍔 طلب مطعم: " + summaryArray.join('، '));
-            alert("🚀 تم إرسال طلباتك بالكامل للمطبخ بنجاح لحظي!");
-            cart = {};
-            renderFoodMenu();
-            goHome();
-        }
-
-        function sendMaintenance() {
-            const type = document.getElementById('maint-type').value;
-            addOrderToHistory("🔧 بلاغ صيانة: عطل " + type);
-            alert("🛠️ تم إرسال بلاغ الصيانة عاجل بقسم (" + type + ")، الفني قادم الآن.");
-            goHome();
-        }
-
-        function sendCleaning() {
-            addOrderToHistory("🧹 طلب خدمة نظافة وترتيب الغرفة");
-            alert("🧹 تم إصدار أمر تعقيم وترتيب الغرفة لطاقم النظافة.");
-            goHome();
-        }
-    </script>
-</body>
-</html>
+  );
+}
