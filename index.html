@@ -1,144 +1,145 @@
-import React from 'react';
-import { FaWhatsapp, FaFacebook, FaInstagram, FaTiktok, FaCode, FaServer, FaDatabase } from 'react-icons/fa';
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kareem Elmohands | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-slate-950">
 
-export default function Portfolio() {
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
-      
-      {/* Hero Section */}
-      <header className="relative overflow-hidden py-24 px-6 text-center border-b border-slate-800 bg-gradient-to-b from-slate-900 to-slate-955">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08),transparent_50%)]"></div>
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-400 mb-6 border border-cyan-500/20">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-            متاح للمشاريع والتعاقدات
-          </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent">
-            Kareem Elmohands
-          </h1>
-          <p className="text-xl text-slate-400 mb-2 font-medium">
-            Full-Stack Web Developer & System Architect
-          </p>
-          <p className="text-sm text-slate-500">
-            طالب بالصف الثاني بكالوريا • المدرسة الثانوية المطورة
-          </p>
+    <header class="relative overflow-hidden py-24 px-6 text-center border-b border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08),transparent_50%)]"></div>
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-cyan-500/10 text-cyan-400 mb-6 border border-cyan-500/20">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                متاح للمشاريع والتعاقدات
+            </div>
+            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-white via-slate-200 to-cyan-400 bg-clip-text text-transparent py-2">
+                Kareem Elmohands
+            </h1>
+            <p class="text-xl text-slate-400 mb-2 font-medium">
+                Full-Stack Web Developer & System Architect
+            </p>
+            <p class="text-sm text-slate-500">
+                طالب بالصف الثاني بكالوريا • المدرسة الثانوية المطورة
+            </p>
         </div>
-      </header>
+    </header>
 
-      {/* Main Content */}
-      <main className="max-w-5xl mx-auto px-6 py-16 space-y-20">
+    <main class="max-w-5xl mx-auto px-6 py-16 space-y-20">
         
-        {/* About Section */}
-        <section className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm">
-          <h2 className="text-2xl font-bold mb-4 text-cyan-400 border-r-4 border-cyan-500 pr-3">نبذة عني</h2>
-          <p className="text-slate-300 leading-relaxed text-lg">
-            أنا كريم المهندس، مبرمج ومطور ويب شغوف ببناء الأنظمة الرقمية المتكاملة. متخصص في تحويل الأفكار المعقدة إلى تطبيقات ويب سلسة، سريعة، وذات كفاءة عالية. أركز دائماً على كتابة كود نظيف وتصميم بنية تحتية قوية للسيستم تضمن استقراره وتحمله لضغط البيانات.
-          </p>
+        <section class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm">
+            <h2 class="text-2xl font-bold mb-4 text-cyan-400 border-r-4 border-cyan-500 pr-3">نبذة عني</h2>
+            <p class="text-slate-300 leading-relaxed text-lg">
+                أنا كريم المهندس، مبرمج ومطور ويب شغوف ببناء الأنظمة الرقمية المتكاملة. متخصص في تحويل الأفكار المعقدة إلى تطبيقات ويب سلسة، سريعة، وذات كفاءة عالية. أركز دائماً على كتابة كود نظيف وتصميم بنية تحتية قوية للسيستم تضمن استقراره وتحمله لضغط البيانات.
+            </p>
         </section>
 
-        {/* Services / Expertise */}
-        <section className="space-y-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-white mb-2">ماذا أقدم؟</h2>
-            <p className="text-slate-400">خدمات برمجية احترافية لتطوير أعمالك</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Service 1 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
-                <FaCode />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-white">برمجة وتطوير المواقع</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                بناء واجهات مستخدم (Front-End) حديثة، سريعة ومتجاوبة بالكامل مع جميع الشاشات باستخدام أحدث التقنيات.
-              </p>
+        <section class="space-y-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-white mb-2">ماذا أقدم؟</h2>
+                <p class="text-slate-400">خدمات برمجية احترافية لتطوير أعمالك</p>
             </div>
-
-            {/* Service 2 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
-                <FaServer />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-white">تصميم سيستم متكامل</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                تطوير لوحات تحكم (Admin Dashboards) وأنظمة خلفية (Back-End) قوية لإدارة العمليات، الموظفين، والمبيعات بدقة.
-              </p>
-            </div>
-
-            {/* Service 3 */}
-            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
-              <div className="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
-                <FaDatabase />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-white">ربط قواعد البيانات والـ APIs</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
-                تصميم وهيكلة قواعد البيانات، وبناء وتكامل الـ APIs لضمان مزامنة البيانات بين أجزاء السيستم بسرعة وأمان.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact & Socials */}
-        <section className="text-center space-y-8 py-8">
-          <div className="max-w-xl mx-auto">
-            <h2 className="text-3xl font-bold text-white mb-3">تواصل معي الآن</h2>
-            <p className="text-slate-400 mb-8">هل لديك فكرة مشروع أو سيستم تريد تنفيذه؟ دعنا نتحدث ونبدأ العمل فوراً.</p>
             
-            {/* Primary CTA: WhatsApp */}
-            <a 
-              href="https://wa.me/2001274847794" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg shadow-lg shadow-emerald-900/20 hover:scale-[1.02] transition-all duration-200"
-            >
-              <FaWhatsapp className="text-2xl" />
-              تواصل عبر الواتساب
-            </a>
-          </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">برمجة وتطوير المواقع</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        بناء واجهات مستخدم (Front-End) حديثة، سريعة ومتجاوبة بالكامل مع جميع الشاشات باستخدام أحدث التقنيات.
+                    </p>
+                </div>
 
-          {/* Social Links */}
-          <div className="pt-6">
-            <p className="text-xs uppercase tracking-wider text-slate-500 mb-4">تابعني على منصات التواصل</p>
-            <div className="flex justify-center gap-4">
-              <a 
-                href="https://www.facebook.com/share/1SrsnDBSJv/?mibextid=wwXIfr" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all text-xl"
-                title="Facebook"
-              >
-                <FaFacebook />
-              </a>
-              <a 
-                href="https://www.instagram.com/kareem.elmohands?igsh=aGlkbDZ1dWFzdzg0&utm_source=qr" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/5 transition-all text-xl"
-                title="Instagram"
-              >
-                <FaInstagram />
-              </a>
-              <a 
-                href="https://vt.tiktok.com/ZSCUVa4Yb/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-slate-800 transition-all text-xl"
-                title="TikTok"
-              >
-                <FaTiktok />
-              </a>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">تصميم سيستم كامل</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        تطوير لوحات تحكم (Admin Dashboards) وأنظمة خلفية (Back-End) قوية لإدارة العمليات، الموظفين، والمبيعات بدقة.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-cyan-500/50 transition-colors duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 text-xl group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-white">ربط قواعد البيانات والـ APIs</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        تصميم وهيكلة قواعد البيانات، وبناء وتكامل الـ APIs لضمان مزامنة البيانات بين أجزاء السيستم بسرعة وأمان.
+                    </p>
+                </div>
             </div>
-          </div>
         </section>
 
-      </main>
+        <section class="text-center space-y-8 py-8">
+            <div class="max-w-xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-3">تواصل معي الآن</h2>
+                <p class="text-slate-400 mb-8">هل لديك فكرة مشروع أو سيستم تريد تنفيذه؟ دعنا نتحدث ونبدأ العمل فوراً.</p>
+                
+                <a 
+                  href="https://wa.me/2001274847794" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg shadow-lg shadow-emerald-900/20 hover:scale-[1.02] transition-all duration-200"
+                >
+                  <i class="fa-brands fa-whatsapp text-2xl"></i>
+                  تواصل عبر الواتساب
+                </a>
+            </div>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-900 py-8 text-center text-xs text-slate-600">
-        <p>© {new Date().getFullYear()} Kareem Elmohands. All rights reserved.</p>
-      </footer>
+            <div class="pt-6">
+                <p class="text-xs uppercase tracking-wider text-slate-500 mb-4">تابعني على منصات التواصل</p>
+                <div class="flex justify-center gap-4">
+                    <a 
+                      href="https://www.facebook.com/share/1SrsnDBSJv/?mibextid=wwXIfr" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-500 hover:border-blue-500/50 hover:bg-blue-500/5 transition-all text-xl"
+                      title="Facebook"
+                    >
+                      <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a 
+                      href="https://www.instagram.com/kareem.elmohands?igsh=aGlkbDZ1dWFzdzg0&utm_source=qr" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/50 hover:bg-pink-500/5 transition-all text-xl"
+                      title="Instagram"
+                    >
+                      <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a 
+                      href="https://vt.tiktok.com/ZSCUVa4Yb/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="w-12 h-12 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:border-slate-700 hover:bg-slate-800 transition-all text-xl"
+                      title="TikTok"
+                    >
+                      <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
 
-    </div>
-  );
-}
+    </main>
+
+    <footer class="border-t border-slate-900 py-8 text-center text-xs text-slate-600">
+        <p>© <span id="year"></span> Kareem Elmohands. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
